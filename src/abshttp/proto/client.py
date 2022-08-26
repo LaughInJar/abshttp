@@ -1,25 +1,24 @@
 """
 Protocol for a basic http client abstraction
 """
-from typing import Callable
+import typing
 from typing import Protocol
 from typing import TypeVar
 
-from abshttp.proto.backend import Backend
-from abshttp.proto.backend import ClientReturn
 from abshttp.proto.request import Request
 from abshttp.proto.response import Response
 
 CallbackReturn = TypeVar("CallbackReturn", covariant=True)
-HttpBackend = TypeVar("HttpBackend", bound=Backend, covariant=True)
+BackendReturn = TypeVar("BackendReturn", covariant=True)
 
 
-class Client(Protocol[HttpBackend, ClientReturn]):
+class Client(Protocol[BackendReturn, CallbackReturn]):
     """ """
 
-    def send(
-        self, request: Request, callback: Callable[[Response], CallbackReturn]
-    ) -> ClientReturn:
+    def callback(self, request: Request, response: Response) -> CallbackReturn:
+        ...
+
+    def send(self, request: Request) -> BackendReturn:
         """ """
         ...
 
