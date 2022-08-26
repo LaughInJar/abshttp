@@ -39,7 +39,7 @@ class URL:
         query = urlencode(self.query, doseq=True)
         return urlunparse((self.scheme, self.netloc, self.path, "", query, self.fragment))
 
-    #: hostname plus optional port (e.g. localhost:8080)
+    #: hostname plus optional port and auth (e.g. user:pass@localhost:8080)
     netloc: str
 
     #: path portion of the urlURL
